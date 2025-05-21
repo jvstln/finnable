@@ -6,7 +6,7 @@ import { createAccountSchema } from "../schemas/account.schema";
 export const accountRouter = express.Router();
 
 accountRouter.post(
-  "/",
+  "/all",
   validationMiddleware.validate({
     path: "body",
     schema: createAccountSchema,
