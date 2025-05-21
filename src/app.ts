@@ -2,13 +2,18 @@ import "dotenv/config";
 import express from "express";
 import { indexRouter } from "./routes/index.route";
 import { connectToDb } from "./utils/db";
+import { errorMiddleware } from "./middlewares/error.middleware";
+import { indexMiddleware } from "./middlewares/index.middleware";
 
 const app = express();
 
+app.use(indexMiddleware);
+
 app.use("/api/v1", indexRouter);
 
-const PORT = process.env.PORT;
+app.use(errorMiddleware);
 
+const PORT = process.env.PORT;
 startApp();
 
 function startApp() {
