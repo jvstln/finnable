@@ -21,6 +21,14 @@ class AccountController {
       data: accounts,
     });
   }
+
+  async getDecryptions(req: Request, res: Response) {
+    res.json({
+      sucess: true,
+      message: "Encrypted values parsed successfully",
+      data: accountService.getRecursiveDecryptions(req.body),
+    });
+  }
 }
 
 export const accountController = new AccountController();

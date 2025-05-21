@@ -1,12 +1,15 @@
 import express from "express";
 import { accountController } from "../controllers/account.controller";
 import { validationMiddleware } from "../middlewares/validation.middleware";
-import { createAccountSchema } from "../schemas/account.schema";
+import {
+  createAccountSchema,
+  recursiveObjectSchema,
+} from "../schemas/account.schema";
 
 export const accountRouter = express.Router();
 
 accountRouter.post(
-  "/all",
+  "/",
   validationMiddleware.validate({
     path: "body",
     schema: createAccountSchema,
@@ -14,4 +17,12 @@ accountRouter.post(
   accountController.createAccount
 );
 
-accountRouter.get("/", accountController.getAllAccounts);
+accountRouter.get("/all", accountController.getAllAccounts);
+accountRouter.get(
+  "/decryptions",
+  validationMiddleware.validate({
+    path: "query",
+    schema: recursiveObjectSchema,
+  }),
+  accountController.getDecryptions
+);
