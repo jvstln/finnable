@@ -1,3 +1,5 @@
+import { VirtualCard } from "./virtualCard.type";
+
 export interface AccountCreation {
   firstName: string;
   surname: string;
@@ -9,3 +11,11 @@ export interface AccountCreation {
 export interface Account extends AccountCreation {
   accountNumber: string;
 }
+
+interface VirtualCardVirtualMap {
+  virtualCards: VirtualCard[];
+}
+
+export type AccountVirtual<T extends keyof VirtualCardVirtualMap> = {
+  [key in T]: VirtualCardVirtualMap[key];
+};

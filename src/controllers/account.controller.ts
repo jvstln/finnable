@@ -11,6 +11,16 @@ class AccountController {
       data: createdAccount,
     });
   }
+
+  async getAllAccounts(req: Request, res: Response) {
+    const accounts = await accountService.getAllAccounts();
+
+    res.status(200).json({
+      success: true,
+      message: "Accounts retrieved successfully",
+      data: accounts,
+    });
+  }
 }
 
 export const accountController = new AccountController();

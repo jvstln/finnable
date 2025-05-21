@@ -13,12 +13,12 @@ const accountSchema = new Schema<Account>({
   email: {
     type: String,
     required: [true, "Email is required"],
-    unique: [true, "Email must be unique"],
+    unique: [true, "Email already exists"],
   },
   phoneNumber: {
     type: String,
     required: [true, "Phone number is required"],
-    unique: [true, "Phone number must be unique"],
+    unique: [true, "Phone number already exists"],
   },
   dateOfBirth: {
     type: Date,
@@ -28,8 +28,14 @@ const accountSchema = new Schema<Account>({
   accountNumber: {
     type: String,
     required: [true, "Account number is required"],
-    unique: [true, "Account number must be unique"],
+    unique: [true, "Account number already exists"],
   },
+});
+
+accountSchema.virtual("virtualCards", {
+  ref: "VirtualCard",
+  localField: "_id",
+  foreignField: "accountId",
 });
 
 export const accountModel = model("Account", accountSchema);

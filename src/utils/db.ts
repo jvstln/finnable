@@ -9,3 +9,7 @@ export const connectToDb = async () => {
     console.log("Error connecting to DB", error);
   }
 };
+
+// Make populations globally apply to POJO and JSONs
+mongoose.set("toJSON", { getters: true, virtuals: true });
+mongoose.set("toObject", { getters: true, virtuals: true });

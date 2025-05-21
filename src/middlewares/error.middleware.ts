@@ -25,6 +25,16 @@ export const errorMiddleware = (
     return;
   }
 
+  if (error instanceof ErrorNamespace) {
+    let errors: Record<string, string> = {};
+
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+    return;
+  }
+
   if (error instanceof APIError) {
     res.status(error.statusCode ?? (Number(error.status) || 400)).json({
       success: false,

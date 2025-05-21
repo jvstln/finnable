@@ -1,7 +1,7 @@
 import { accountModel } from "../models/account.model";
-import { AccountCreation } from "../types/account.type";
-import { APIError } from "../utils/error";
+import { AccountCreation, AccountVirtual } from "../types/account.type";
 import { generateAccountNumber } from "../utils/finance";
+import { virtualCardService } from "./virtualCard.service";
 
 class AccountService {
   async createAccount(data: AccountCreation) {
@@ -11,7 +11,16 @@ class AccountService {
       accountNumber,
     });
 
-    return account;
+    // Create a virtual card for the account
+    await virtualCardService.createVirtualCard(account._id);
+
+    return account.populate<AccountVirtual<"virtualCards">>("virtualCards");
+  }
+
+  async getAllAccounts() {
+    return accountModel
+      .find()
+      .populate<AccountVirtual<"virtualCards">>("virtualCards");
   }
 }
 

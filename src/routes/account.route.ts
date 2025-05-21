@@ -13,3 +13,5 @@ accountRouter.post(
   }),
   accountController.createAccount
 );
+
+accountRouter.get("/", accountController.getAllAccounts);
