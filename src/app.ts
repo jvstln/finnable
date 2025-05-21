@@ -13,7 +13,7 @@ app.use("/api/v1", indexRouter);
 
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT ?? 5000;
 startApp();
 
 function startApp() {

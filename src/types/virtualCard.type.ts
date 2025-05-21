@@ -1,6 +1,10 @@
 export interface VirtualCard {
   accountId: ObjectId;
   cardNumber: string;
-  expiryDate: Date;
+  expiryDate: string;
   cvv: string;
+
+  cardNumberDecrypted: string;
+  expiryDateDecrypted: Date;
+  cvvDecrypted: string;
 }

@@ -8,8 +8,11 @@ export interface AccountCreation {
   dateOfBirth: Date;
 }
 
-export interface Account extends AccountCreation {
+export interface Account extends Omit<AccountCreation, "dateOfBirth"> {
   accountNumber: string;
+  dateOfBirth: string;
+  phoneNumberDecrypted: string;
+  dateOfBirthDecrypted: Date;
 }
 
 interface VirtualCardVirtualMap {
