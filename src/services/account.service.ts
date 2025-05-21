@@ -1,6 +1,6 @@
 import { accountModel } from "../models/account.model";
 import { AccountCreation, AccountVirtual } from "../types/account.type";
-import { generateAccountNumber } from "../utils/finance";
+import { generateAccountNumber } from "../utils/finance.util";
 import { virtualCardService } from "./virtualCard.service";
 
 class AccountService {

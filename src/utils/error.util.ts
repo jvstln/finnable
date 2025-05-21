@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { setNestedValue } from "./utils";
+import { setNestedValue } from "./index.util";
 
 export enum StatusCodes {
   OK = 200,

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { indexRouter } from "./routes/index.route";
-import { connectToDb } from "./utils/db";
+import { connectToDb } from "./utils/db.util";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { indexMiddleware } from "./middlewares/index.middleware";
 
