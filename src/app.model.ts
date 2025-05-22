@@ -3,6 +3,10 @@ import { decrypt, encrypt } from "./utils/util.js";
 
 const THREE_YEARS_IN_MILLISECONDS = 1000 * 60 * 60 * 24 * 365 * 3;
 
+export interface RecursiveRecord {
+  [key: string]: string | RecursiveRecord;
+}
+
 export interface AccountCreation {
   firstName: string;
   surname: string;

@@ -3,6 +3,7 @@ import {
   AccountCreation,
   accountModel,
   AccountVirtual,
+  RecursiveRecord,
   virtualCardModel,
 } from "./app.model.js";
 import {
@@ -11,10 +12,6 @@ import {
   generateCardNumber,
   generateCVV,
 } from "./utils/util.js";
-
-interface RecursiveRecord {
-  [key: string]: string | RecursiveRecord;
-}
 
 export async function createVirtualCard(
   accountId: mongoose.Types.ObjectId | string
@@ -49,7 +46,7 @@ export async function getAllAccounts() {
  * Returns decrypted values of all keys provided in the body
  * If an invalid encryption is found, it becomes null
  */
-export async function getRecursiveDecryptions(obj: RecursiveRecord) {
+export function getRecursiveDecryptions(obj: RecursiveRecord) {
   const results: Record<string, unknown> = {};
 
   for (const prop in obj) {

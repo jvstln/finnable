@@ -6,7 +6,7 @@ import { createAccountSchema, decryptionRequestSchema } from "./app.schema.js";
 export const appRoute = express.Router();
 
 appRoute.post(
-  "/",
+  "accounts/",
   validator({
     path: "body",
     schema: createAccountSchema,
@@ -14,11 +14,11 @@ appRoute.post(
   appController.createAccount
 );
 
-appRoute.get("/all", appController.getAllAccounts);
-appRoute.get(
+appRoute.get("accounts/all", appController.getAllAccounts);
+appRoute.post(
   "/decryptions",
   validator({
-    path: "query",
+    path: "body",
     schema: decryptionRequestSchema,
   }),
   appController.getDecryptions
