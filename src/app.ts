@@ -1,26 +1,19 @@
-import "dotenv/config";
 import express from "express";
-import { indexRouter } from "./routes/index.route";
-import { connectToDb } from "./utils/db.util";
-import { errorMiddleware } from "./middlewares/error.middleware";
-import { indexMiddleware } from "./middlewares/index.middleware";
+import "dotenv/config";
+import { connectToDb } from "./utils/util.js";
+import { appMiddlewareRoute } from "./middlewares/validator.middleware.js";
+import { appRoute } from "./app.route.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 const app = express();
 
-app.use(indexMiddleware);
+app.use(appMiddlewareRoute);
+app.use("/api/v1", appRoute);
 
-app.use("/api/v1", indexRouter);
-
+// Handle Errors
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT ?? 5000;
-startApp();
+const PORT = process.env.PORT || 5000;
 
-function startApp() {
-  try {
-    connectToDb();
-    app.listen(PORT, () => console.log("App listening on", PORT));
-  } catch (error) {
-    console.log("Error connecting to Express: ", error);
-  }
-}
+connectToDb();
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

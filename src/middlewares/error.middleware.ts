@@ -1,4 +1,4 @@
-import { APIError } from "../utils/error.util";
+import { APIError } from "../utils/error.util.js";
 import { Request, Response, NextFunction } from "express";
 import { Error as ErrorNamespace } from "mongoose";
 

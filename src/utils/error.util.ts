@@ -1,5 +1,4 @@
 import Joi from "joi";
-import { setNestedValue } from "./index.util";
 
 export enum StatusCodes {
   OK = 200,
@@ -69,12 +68,3 @@ export class APIError extends Error {
     this.body = body;
   }
 }
-
-export const formatJoiError = (error: Joi.ValidationError | undefined) => {
-  if (!error) return undefined;
-
-  return error.details.reduce((acc, curr) => {
-    setNestedValue(acc, curr.path.join("."), curr.message);
-    return acc;
-  }, {});
-};

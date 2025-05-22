@@ -1,5 +1,21 @@
 import "dotenv/config";
 import crypto from "crypto";
+import { customAlphabet } from "nanoid";
+import mongoose from "mongoose";
+
+const customNanoid = customAlphabet("0123456789");
+
+export function generateAccountNumber() {
+  return customNanoid(10);
+}
+
+export function generateCardNumber() {
+  return customNanoid(16);
+}
+
+export function generateCVV() {
+  return customNanoid(3);
+}
 
 // This generates a safe 32 byte key from any given secret key
 const key = crypto.pbkdf2Sync(
@@ -31,3 +47,17 @@ export function decrypt(encryptedData: string) {
   decrypted += decipher.final("utf8");
   return decrypted;
 }
+
+// Setup DB
+export const connectToDb = async () => {
+  try {
+    const connection = await mongoose.connect(process.env.MONGODB_URI!);
+    return connection;
+  } catch (error) {
+    console.log("Error connecting to DB", error);
+  }
+};
+
+// Make populations globally apply to POJO and JSONs
+mongoose.set("toJSON", { getters: true, virtuals: true });
+mongoose.set("toObject", { getters: true, virtuals: true });
