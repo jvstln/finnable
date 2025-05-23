@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
-import { Account } from "../types/account.type";
-import { decrypt, encrypt } from "../utils/crypto.util";
+import { Account } from "../types/account.type.js";
+import { decrypt, encrypt } from "../utils/crypto.util.js";
 
 const accountSchema = new Schema<Account>(
   {

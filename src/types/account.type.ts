@@ -1,4 +1,4 @@
-import { VirtualCard } from "./virtualCard.type";
+import { VirtualCard } from "./virtualCard.type.js";
 
 export interface AccountCreation {
   firstName: string;

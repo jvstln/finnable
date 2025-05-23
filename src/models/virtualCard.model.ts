@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
-import { VirtualCard } from "../types/virtualCard.type";
-import { encrypt, decrypt } from "../utils/crypto.util";
+import { VirtualCard } from "../types/virtualCard.type.js";
+import { encrypt, decrypt } from "../utils/crypto.util.js";
 
 const THREE_YEARS_IN_MILLISECONDS = 1000 * 60 * 60 * 24 * 365 * 3;
 

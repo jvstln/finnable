@@ -1,9 +1,9 @@
 import Joi from "joi";
-import { APIError } from "../utils/error.util";
-import { formatJoiError } from "../utils/error.util";
+import { APIError } from "../utils/error.util.js";
+import { formatJoiError } from "../utils/error.util.js";
 import { Request, Response, NextFunction } from "express";
-import { getNestedValue, normalizeSearchParams } from "../utils/index.util";
-import { setNestedValue } from "../utils/index.util";
+import { getNestedValue, normalizeSearchParams } from "../utils/index.util.js";
+import { setNestedValue } from "../utils/index.util.js";
 
 interface ValidationOption {
   path: string;

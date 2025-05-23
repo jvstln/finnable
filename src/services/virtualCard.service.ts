@@ -1,5 +1,5 @@
-import { virtualCardModel } from "../models/virtualCard.model";
-import { generateCardNumber, generateCVV } from "../utils/finance.util";
+import { virtualCardModel } from "../models/virtualCard.model.js";
+import { generateCardNumber, generateCVV } from "../utils/finance.util.js";
 
 class VirtualCardService {
   async createVirtualCard(accountId: ObjectId) {

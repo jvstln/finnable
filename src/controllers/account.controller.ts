@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { accountService } from "../services/account.service";
+import { accountService } from "../services/account.service.js";
 
 class AccountController {
   async createAccount(req: Request, res: Response) {

@@ -1,0 +1,42 @@
+import { model, Schema } from "mongoose";
+import { encrypt, decrypt } from "../utils/crypto.util.js";
+const THREE_YEARS_IN_MILLISECONDS = 1000 * 60 * 60 * 24 * 365 * 3;
+const virtualCardSchema = new Schema({
+    accountId: {
+        type: Schema.Types.ObjectId,
+        ref: "Account",
+        required: [true, "Account ID is required"],
+    },
+    cardNumber: {
+        type: String,
+        required: [true, "Card number is required"],
+        set: (cardNumber) => encrypt(cardNumber),
+    },
+    expiryDate: {
+        type: String,
+        required: [true, "Expiry date is required"],
+        default: new Date(Date.now() + THREE_YEARS_IN_MILLISECONDS).toString(),
+        set: (expiryDate) => encrypt(new Date(expiryDate).toString()),
+    },
+    cvv: {
+        type: String,
+        required: [true, "CVV is required"],
+        min: [3, "CVV must be 3 digits"],
+        max: [3, "CVV must be 3 digits"],
+        set: (cvv) => encrypt(cvv),
+    },
+}, {
+    timestamps: true,
+    id: false,
+});
+// Decrypt encrypted fields using virtuals
+virtualCardSchema.virtual("cardNumberDecrypted").get(function () {
+    return decrypt(this.cardNumber);
+});
+virtualCardSchema.virtual("expiryDateDecrypted").get(function () {
+    return new Date(decrypt(this.expiryDate));
+});
+virtualCardSchema.virtual("cvvDecrypted").get(function () {
+    return decrypt(this.cvv);
+});
+export const virtualCardModel = model("VirtualCard", virtualCardSchema);

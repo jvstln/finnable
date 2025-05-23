@@ -1,10 +1,7 @@
 import express from "express";
-import { accountController } from "../controllers/account.controller";
-import { validationMiddleware } from "../middlewares/validation.middleware";
-import {
-  createAccountSchema,
-  recursiveObjectSchema,
-} from "../schemas/account.schema";
+import { accountController } from "../controllers/account.controller.js";
+import { validationMiddleware } from "../middlewares/validation.middleware.js";
+import { createAccountSchema } from "../schemas/account.schema.js";
 
 export const accountRouter = express.Router();
 
@@ -18,11 +15,3 @@ accountRouter.post(
 );
 
 accountRouter.get("/all", accountController.getAllAccounts);
-accountRouter.get(
-  "/decryptions",
-  validationMiddleware.validate({
-    path: "query",
-    schema: recursiveObjectSchema,
-  }),
-  accountController.getDecryptions
-);

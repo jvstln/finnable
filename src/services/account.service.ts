@@ -1,8 +1,8 @@
-import { accountModel } from "../models/account.model";
-import { AccountCreation, AccountVirtual } from "../types/account.type";
-import { decrypt } from "../utils/crypto.util";
-import { generateAccountNumber } from "../utils/finance.util";
-import { virtualCardService } from "./virtualCard.service";
+import { accountModel } from "../models/account.model.js";
+import { AccountCreation, AccountVirtual } from "../types/account.type.js";
+import { decrypt } from "../utils/crypto.util.js";
+import { generateAccountNumber } from "../utils/finance.util.js";
+import { virtualCardService } from "./virtualCard.service.js";
 
 class AccountService {
   async createAccount(data: AccountCreation) {
